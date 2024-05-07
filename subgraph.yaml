@@ -1,0 +1,315 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: AlivelandMarketplace
+    network: mumbai
+    source:
+      address: "0xF577A038dC7E6eCdedd3a4a8145a6C3C77366CB1"
+      abi: AlivelandMarketplace
+      startBlock: 47071082
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Initialized
+        - ItemCanceled
+        - ItemListed
+        - ItemSold
+        - ItemUpdated
+        - OfferCanceled
+        - OfferCreated
+        - OwnershipTransferred
+        - UpdatePlatformFee
+        - UpdatePlatformFeeRecipient
+        - TradeVolume
+      abis:
+        - name: AlivelandMarketplace
+          file: ./abis/AlivelandMarketplace.json
+      eventHandlers:
+        - event: Initialized(uint8)
+          handler: handleInitialized
+        - event: ItemCanceled(indexed address,indexed address,uint256)
+          handler: handleItemCanceled
+        - event: ItemListed(indexed address,indexed
+            address,string,uint256,uint256,address,uint256,uint256)
+          handler: handleItemListed
+        - event: ItemSold(indexed address,indexed address,indexed
+            address,uint256,uint256,address,uint256)
+          handler: handleItemSold
+        - event: ItemUpdated(indexed address,indexed address,uint256,address,uint256)
+          handler: handleItemUpdated
+        - event: OfferCanceled(indexed address,indexed address,uint256)
+          handler: handleOfferCanceled
+        - event: OfferCreated(indexed address,indexed address,indexed
+            address,uint256,uint256,address,uint256,uint256)
+          handler: handleOfferCreated
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: UpdatePlatformFee(uint16)
+          handler: handleUpdatePlatformFee
+        - event: UpdatePlatformFeeRecipient(address)
+          handler: handleUpdatePlatformFeeRecipient
+      file: ./src/aliveland-marketplace.ts
+  - kind: ethereum
+    name: AlivelandAuction
+    network: mumbai
+    source:
+      address: "0xe58E95623906286E160545204e98519613319a36"
+      abi: AlivelandAuction
+      startBlock: 45128964
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AlivelandAuctionContractDeployed
+        - AuctionCancelled
+        - AuctionCreated
+        - AuctionResulted
+        - BidPlaced
+        - BidRefunded
+        - BidWithdrawn
+        - AlivelandAuctionInitialized
+        - AlivelandAuctionOwnershipTransferred
+        - PauseToggled
+        - UpdateAuctionEndTime
+        - UpdateAuctionReservePrice
+        - UpdateAuctionStartTime
+        - UpdateBidWithdrawalLockTime
+        - UpdateMinBidIncrement
+        - AlivelandAuctionUpdatePlatformFee
+        - AlivelandAuctionUpdatePlatformFeeRecipient
+        - TradeVolume
+      abis:
+        - name: AlivelandAuction
+          file: ./abis/AlivelandAuction.json
+      eventHandlers:
+        - event: AlivelandAuctionContractDeployed()
+          handler: handleAlivelandAuctionContractDeployed
+        - event: AuctionCancelled(indexed address,indexed uint256)
+          handler: handleAuctionCancelled
+        - event: AuctionCreated(indexed address,indexed
+            uint256,string,uint256,uint256,address,uint256,indexed address,uint256)
+          handler: handleAuctionCreated
+        - event: AuctionResulted(address,indexed address,indexed uint256,indexed
+            address,address,uint256)
+          handler: handleAuctionResulted
+        - event: BidPlaced(indexed address,indexed uint256,indexed address,address,uint256)
+          handler: handleBidPlaced
+        - event: BidRefunded(indexed address,indexed uint256,indexed address,uint256)
+          handler: handleBidRefunded
+        - event: BidWithdrawn(indexed address,indexed uint256,indexed address,uint256)
+          handler: handleBidWithdrawn
+        - event: Initialized(uint8)
+          handler: handleInitialized
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: PauseToggled(bool)
+          handler: handlePauseToggled
+        - event: UpdateAuctionEndTime(indexed address,indexed uint256,uint256)
+          handler: handleUpdateAuctionEndTime
+        - event: UpdateAuctionReservePrice(indexed address,indexed uint256,address,uint256)
+          handler: handleUpdateAuctionReservePrice
+        - event: UpdateAuctionStartTime(indexed address,indexed uint256,uint256)
+          handler: handleUpdateAuctionStartTime
+        - event: UpdateBidWithdrawalLockTime(uint256)
+          handler: handleUpdateBidWithdrawalLockTime
+        - event: UpdateMinBidIncrement(uint256)
+          handler: handleUpdateMinBidIncrement
+        - event: UpdatePlatformFee(uint256)
+          handler: handleUpdatePlatformFee
+        - event: UpdatePlatformFeeRecipient(address)
+          handler: handleUpdatePlatformFeeRecipient
+      file: ./src/aliveland-auction.ts
+  - kind: ethereum
+    name: AlivelandTokenRegistry
+    network: mumbai
+    source:
+      address: "0xb30a35b06319Cbe72D5c8b99B2B9D52c6C00A316"
+      abi: AlivelandTokenRegistry
+      startBlock: 45128968
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AlivelandTokenRegistryOwnershipTransferred
+        - TokenAdded
+        - TokenRemoved
+      abis:
+        - name: AlivelandTokenRegistry
+          file: ./abis/AlivelandTokenRegistry.json
+      eventHandlers:
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: TokenAdded(address)
+          handler: handleTokenAdded
+        - event: TokenRemoved(address)
+          handler: handleTokenRemoved
+      file: ./src/aliveland-token-registry.ts
+  - kind: ethereum
+    name: AlivelandERC721Factory
+    network: mumbai
+    source:
+      address: "0x1dc7DA56368576753686c90A13E4466224dEbeC9"
+      abi: AlivelandERC721Factory
+      startBlock: 45128983
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ContractCreated
+        - ContractDisabled
+        - AlivelandERC721FactoryOwnershipTransferred
+      abis:
+        - name: AlivelandERC721Factory
+          file: ./abis/AlivelandERC721Factory.json
+      eventHandlers:
+        - event: ContractCreated(address,address,string)
+          handler: handleContractCreated
+        - event: ContractDisabled(address,address)
+          handler: handleContractDisabled
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+      file: ./src/aliveland-erc-721-factory.ts
+  - kind: ethereum
+    name: AlivelandERC1155Factory
+    network: mumbai
+    source:
+      address: "0xa9eE108888c3eb79d2b19B88e2Cd4aA0D12b9626"
+      abi: AlivelandERC1155Factory
+      startBlock: 45128986
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AlivelandERC1155FactoryContractCreated
+        - AlivelandERC1155FactoryContractDisabled
+        - AlivelandERC1155FactoryOwnershipTransferred
+      abis:
+        - name: AlivelandERC1155Factory
+          file: ./abis/AlivelandERC1155Factory.json
+      eventHandlers:
+        - event: ContractCreated(address,address,string)
+          handler: handleContractCreated
+        - event: ContractDisabled(address,address)
+          handler: handleContractDisabled
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+      file: ./src/aliveland-erc-1155-factory.ts
+templates:
+  - name: AlivelandERC721
+    kind: ethereum
+    network: mumbai
+    source:
+      abi: AlivelandERC721
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AlivelandERC721
+        - Approval
+        - ApprovalForAll
+        - BatchMetadataUpdate
+        - MetadataUpdate
+        - Minted
+        - AlivelandERC721OwnershipTransferred
+        - Paused
+        - RoleAdminChanged
+        - RoleGranted
+        - RoleRevoked
+        - Transfer
+        - Unpaused
+        - UpdateFeeRecipient
+        - UpdateMintFee
+      abis:
+        - name: AlivelandERC721
+          file: ./abis/AlivelandERC721.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,indexed uint256)
+          handler: handleApproval
+        - event: ApprovalForAll(indexed address,indexed address,bool)
+          handler: handleApprovalForAll
+        - event: BatchMetadataUpdate(uint256,uint256)
+          handler: handleBatchMetadataUpdate
+        - event: MetadataUpdate(uint256)
+          handler: handleMetadataUpdate
+        - event: Minted(uint256,address,string,address,string)
+          handler: handleMinted
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Paused(address)
+          handler: handlePaused
+        - event: RoleAdminChanged(indexed bytes32,indexed bytes32,indexed bytes32)
+          handler: handleRoleAdminChanged
+        - event: RoleGranted(indexed bytes32,indexed address,indexed address)
+          handler: handleRoleGranted
+        - event: RoleRevoked(indexed bytes32,indexed address,indexed address)
+          handler: handleRoleRevoked
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+        - event: Unpaused(address)
+          handler: handleUnpaused
+        - event: UpdateFeeRecipient(address)
+          handler: handleUpdateFeeRecipient
+        - event: UpdateMintFee(uint256)
+          handler: handleUpdateMintFee
+      file: ./src/aliveland-erc-721.ts
+  - name: AlivelandERC1155
+    kind: ethereum
+    network: mumbai
+    source:
+      abi: AlivelandERC1155
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AlivelandERC1155
+        - AlivelandERC1155ApprovalForAll
+        - BatchMinted
+        - AlivelandERC1155Minted
+        - AlivelandERC1155OwnershipTransferred
+        - AlivelandERC1155Paused
+        - AlivelandERC1155RoleAdminChanged
+        - AlivelandERC1155RoleGranted
+        - AlivelandERC1155RoleRevoked
+        - TransferBatch
+        - TransferSingle
+        - URI
+        - AlivelandERC1155Unpaused
+      abis:
+        - name: AlivelandERC1155
+          file: ./abis/AlivelandERC1155.json
+      eventHandlers:
+        - event: ApprovalForAll(indexed address,indexed address,bool)
+          handler: handleApprovalForAll
+        - event: BatchMinted(address,address)
+          handler: handleBatchMinted
+        - event: Minted(uint256,address,string,address,string)
+          handler: handleMinted
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Paused(address)
+          handler: handlePaused
+        - event: RoleAdminChanged(indexed bytes32,indexed bytes32,indexed bytes32)
+          handler: handleRoleAdminChanged
+        - event: RoleGranted(indexed bytes32,indexed address,indexed address)
+          handler: handleRoleGranted
+        - event: RoleRevoked(indexed bytes32,indexed address,indexed address)
+          handler: handleRoleRevoked
+        - event: TransferBatch(indexed address,indexed address,indexed address,uint256[],uint256[])
+          handler: handleTransferBatch
+        - event: TransferSingle(indexed address,indexed address,indexed address,uint256,uint256)
+          handler: handleTransferSingle
+        - event: URI(string,indexed uint256)
+          handler: handleURI
+        - event: Unpaused(address)
+          handler: handleUnpaused
+      file: ./src/aliveland-erc-1155.ts

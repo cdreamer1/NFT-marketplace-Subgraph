@@ -1,0 +1,26 @@
+{
+  "mumbai": {
+    "AlivelandMarketplace": {
+      "address": "0xF577A038dC7E6eCdedd3a4a8145a6C3C77366CB1",
+      "startBlock": 47071082
+    },
+    "AlivelandAuction": {
+      "address": "0x656cAc7404AA8c5070CfaAA5F28e7309286FDC30"
+    },
+    "AlivelandTokenRegistry": {
+      "address": "0x7dD804fCBF361b763CeAE636efb235f46ab0fa61"
+    },
+    "AlivelandERC721Factory": {
+      "address": "0x7B5f26f2EAabcD6E1B0049d5F13bE56161Cbd156"
+    },
+    "AlivelandERC1155Factory": {
+      "address": "0x5Aa7e78d6d368e5906219f38671C4E44F4941810"
+    },
+    "AlivelandERC721": {
+      "address": "0xB5079340B322F88C57b6D44330B6A82bd711888b"
+    },
+    "AlivelandERC1155": {
+      "address": "0xE9DB083F754D39b46bF97207E7B62faDB8942846"
+    }
+  }
+}

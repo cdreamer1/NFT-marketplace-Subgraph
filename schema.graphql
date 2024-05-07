@@ -1,0 +1,376 @@
+enum EventCategory {
+  Minted
+  Listed
+  AuctionCreated
+  CancelListing
+  Sold
+  BidPlaced
+  BidAccepted
+  CancelAuction
+  OfferMade
+  OfferAccepted
+  OfferCanceled
+  Transferred
+}
+
+enum NFTType {
+  ERC721
+  ERC1155
+}
+
+type Initialized @entity {
+  id: Bytes!
+  version: Int! # uint8
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type History @entity {
+  id: String!
+  eventType: EventCategory!
+  from: Bytes # address
+  to: Bytes # address
+  nft: Bytes! # address
+  nftType: String # string
+  tokenId: BigInt! # uint256
+  quantity: BigInt
+  payToken: Bytes
+  pricePerItem: BigInt
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ItemListed @entity {
+  id: String!
+  owner: Bytes! # address
+  nft: Bytes! # address
+  mediaType: String! # string
+  tokenId: BigInt! # uint256
+  quantity: BigInt! # uint256
+  payToken: Bytes! # address
+  pricePerItem: BigInt! # uint256
+  startingTime: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ItemSold @entity {
+  id: String!
+  seller: Bytes! # address
+  buyer: Bytes! # address
+  nft: Bytes! # address
+  tokenId: BigInt! # uint256
+  quantity: BigInt! # uint256
+  payToken: Bytes! # address
+  pricePerItem: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type OfferCreated @entity {
+  id: String!
+  creator: Bytes! # address
+  nft: Bytes! # address
+  owner: Bytes! # address
+  tokenId: BigInt! # uint256
+  quantity: BigInt! # uint256
+  payToken: Bytes! # address
+  pricePerItem: BigInt! # uint256
+  deadline: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type OwnershipTransferred @entity {
+  id: Bytes!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type UpdatePlatformFee @entity {
+  id: Bytes!
+  platformFee: Int! # uint16
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type UpdatePlatformFeeRecipient @entity {
+  id: Bytes!
+  platformFeeRecipient: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type AuctionCreated @entity {
+  id: String!
+  nftAddress: Bytes! # address
+  tokenId: BigInt! # uint256
+  owner: Bytes # address
+  mediaType: String! # string
+  startTime: BigInt # uint256
+  endTime: BigInt # uint256
+  payToken: Bytes # address
+  reservePrice: BigInt # uint256
+  lockTime: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type AuctionResulted @entity {
+  id: String!
+  oldOwner: Bytes! # address
+  nftAddress: Bytes! # address
+  tokenId: BigInt! # uint256
+  winner: Bytes! # address
+  payToken: Bytes! # address
+  winningBid: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type BidPlaced @entity {
+  id: String!
+  nftAddress: Bytes! # address
+  tokenId: BigInt! # uint256
+  bidder: Bytes! # address
+  owner: Bytes! # address
+  bid: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type AlivelandAuctionOwnershipTransferred @entity {
+  id: Bytes!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PauseToggled @entity {
+  id: Bytes!
+  isPaused: Boolean! # bool
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type AlivelandAuctionUpdatePlatformFee @entity {
+  id: Bytes!
+  platformFee: BigInt # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type AlivelandTokenRegistryOwnershipTransferred @entity {
+  id: Bytes!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type TokenAdded @entity {
+  id: String!
+  token: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ContractCreated @entity {
+  id: String!
+  creator: Bytes! # address
+  nft: Bytes! # address
+  nftType: String! # string
+  feeRecipient: Bytes # address
+  mintFee: BigInt # uint256
+  name: String
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type FactoryOwnershipTransferred @entity {
+  id: Bytes!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+  nftType: String! # string
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Approval @entity {
+  id: Bytes!
+  owner: Bytes! # address
+  approved: Bytes! # address
+  tokenId: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ApprovalForAll @entity {
+  id: Bytes!
+  owner: Bytes! # address
+  operator: Bytes! # address
+  approved: Boolean! # bool
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type BatchMetadataUpdate @entity {
+  id: Bytes!
+  _fromTokenId: BigInt! # uint256
+  _toTokenId: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type MetadataUpdate @entity {
+  id: Bytes!
+  _tokenId: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Minted @entity {
+  id: String!
+  nft: Bytes! # address
+  tokenId: BigInt! # uint256
+  beneficiary: Bytes # address
+  tokenUri: String # string
+  minter: Bytes # address
+  nftType: String # string
+  name: String
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type AlivelandERC721OwnershipTransferred @entity {
+  id: Bytes!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type RoleAdminChanged @entity {
+  id: Bytes!
+  role: Bytes! # bytes32
+  previousAdminRole: Bytes! # bytes32
+  newAdminRole: Bytes! # bytes32
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type RoleGranted @entity {
+  id: String!
+  nft: Bytes! # address
+  role: Bytes! # bytes32
+  account: Bytes! # address
+  sender: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Transfer @entity {
+  id: String!
+  nft: Bytes! # address
+  operator: Bytes # address
+  from: Bytes! # address
+  to: Bytes! # address
+  tokenId: BigInt! # uint256
+  value: BigInt
+  nftType: String! # string
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type AlivelandERC1155ApprovalForAll @entity {
+  id: Bytes!
+  account: Bytes! # address
+  operator: Bytes! # address
+  approved: Boolean! # bool
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type AlivelandERC1155OwnershipTransferred @entity {
+  id: Bytes!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type AlivelandERC1155Paused @entity {
+  id: Bytes!
+  account: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type AlivelandERC1155RoleAdminChanged @entity {
+  id: Bytes!
+  role: Bytes! # bytes32
+  previousAdminRole: Bytes! # bytes32
+  newAdminRole: Bytes! # bytes32
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type AlivelandERC1155RoleGranted @entity {
+  id: String!
+  nft: Bytes! # address
+  role: Bytes! # bytes32
+  account: Bytes! # address
+  sender: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type URI @entity {
+  id: Bytes!
+  value: String! # string
+  AlivelandERC1155_id: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type TradeVolume @entity {
+  id: String!
+  value: BigInt!
+  blockTimestamp: BigInt!
+}
